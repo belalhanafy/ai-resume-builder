@@ -83,6 +83,8 @@ const MyResume = () => {
                     height={document.documentElement.clientHeight}
                 />
             )}
+            {/* 
+             */}
             {loading ? (<div className="flex justify-center items-center h-screen">
                 <Loading />
             </div>) : (
@@ -95,7 +97,7 @@ const MyResume = () => {
                         <Button onClick={handleDownload} className="bg-blue-500 hover:bg-blue-600 text-white">
                             Download PDF <BsDownload />
                         </Button>
-                        <RWebShare
+                        {/* <RWebShare
                             data={{
                                 text: "Hello Everyone, This is my resume please open url to see it",
                                 url: import.meta.env.VITE_BASE_URL + "/myResume/" + resumeId + "/view",
@@ -103,7 +105,7 @@ const MyResume = () => {
                             }}
                             onClick={() => console.log("shared successfully!")}
                         > <Button className="bg-blue-500 hover:bg-blue-600 text-white">Share <FaShare /></Button>
-                        </RWebShare>
+                        </RWebShare> */}
 
                     </div>
                     <div ref={resumeRef}> {/* Wrap ResumePreview in a ref */}
