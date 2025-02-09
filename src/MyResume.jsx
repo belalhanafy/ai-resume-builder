@@ -95,16 +95,19 @@ const MyResume = () => {
                         <Button onClick={handleDownload} className="bg-blue-500 hover:bg-blue-600 text-white">
                             Download PDF <BsDownload />
                         </Button>
+                        <Button onClick={handleDownload} className="bg-blue-500 hover:bg-blue-600 text-white">
+                            Share <FaShare/>
+                        </Button>
                         {/* problem is here -----*/}
-                        <RWebShare
+                        {/* <RWebShare
                             data={{
                                 text: "Hello Everyone, This is my resume please open url to see it",
-                                // url: `${baseUrl}/myResume/${resumeId}/view`,
+                                url: `${baseUrl}/myResume/${resumeId}/view`,
                                 title: resumeInfo?.firstName + " " + resumeInfo?.lastName + " resume",
                             }}
                             onClick={() => console.log("shared successfully!")}
                         > <Button className="bg-blue-500 hover:bg-blue-600 text-white">Share <FaShare /></Button>
-                        </RWebShare>
+                        </RWebShare> */}
                         {/* ------------- */}
                     </div>
                     <div ref={resumeRef}> {/* Wrap ResumePreview in a ref */}
