@@ -95,7 +95,7 @@ const MyResume = () => {
                         <Button onClick={handleDownload} className="bg-blue-500 hover:bg-blue-600 text-white">
                             Download PDF <BsDownload />
                         </Button>
-                        <Button onClick={handleDownload} className="bg-blue-500 hover:bg-blue-600 text-white">
+                        <Button className="bg-blue-500 hover:bg-blue-600 text-white">
                             Share <FaShare/>
                         </Button>
                         {/* problem is here -----*/}
