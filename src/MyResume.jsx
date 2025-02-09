@@ -13,8 +13,8 @@ import jsPDF from 'jspdf';
 import { RWebShare } from 'react-web-share'
 import Loading from './loader/Loading';
 
+const baseUrl = import.meta.env.VITE_BASE_URL;
 const MyResume = () => {
-    const baseUrl = import.meta.env.VITE_BASE_URL;
     const [resumeInfo, setResumeInfo] = useState({})
     const [showConfetti, setShowConfetti] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -72,8 +72,8 @@ const MyResume = () => {
 
         pdf.save(resumeInfo?.firstName + " " + resumeInfo?.lastName + " resume");
     };
-    console.log(import.meta.env.VITE_BASE_URL);
-
+    console.log(baseUrl);
+    
     return (
         <ResumeInfoContext.Provider value={{ resumeInfo, setResumeInfo }}>
             <Header />
