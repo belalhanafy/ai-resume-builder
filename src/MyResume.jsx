@@ -14,7 +14,7 @@ import { RWebShare } from 'react-web-share'
 import Loading from './loader/Loading';
 
 const MyResume = () => {
-
+    const baseUrl = import.meta.env.VITE_BASE_URL;
     const [resumeInfo, setResumeInfo] = useState({})
     const [showConfetti, setShowConfetti] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -72,7 +72,7 @@ const MyResume = () => {
 
         pdf.save(resumeInfo?.firstName + " " + resumeInfo?.lastName + " resume");
     };
-
+    console.log(import.meta.env.VITE_BASE_URL);
 
     return (
         <ResumeInfoContext.Provider value={{ resumeInfo, setResumeInfo }}>
@@ -83,8 +83,6 @@ const MyResume = () => {
                     height={document.documentElement.clientHeight}
                 />
             )}
-            {/* 
-             */}
             {loading ? (<div className="flex justify-center items-center h-screen">
                 <Loading />
             </div>) : (
@@ -97,16 +95,17 @@ const MyResume = () => {
                         <Button onClick={handleDownload} className="bg-blue-500 hover:bg-blue-600 text-white">
                             Download PDF <BsDownload />
                         </Button>
-                        {/* <RWebShare
+                        {/* problem is here -----*/}
+                        <RWebShare
                             data={{
                                 text: "Hello Everyone, This is my resume please open url to see it",
-                                url: import.meta.env.VITE_BASE_URL + "/myResume/" + resumeId + "/view",
+                                url: `${baseUrl}/myResume/${resumeId}/view`,
                                 title: resumeInfo?.firstName + " " + resumeInfo?.lastName + " resume",
                             }}
                             onClick={() => console.log("shared successfully!")}
                         > <Button className="bg-blue-500 hover:bg-blue-600 text-white">Share <FaShare /></Button>
-                        </RWebShare> */}
-
+                        </RWebShare>
+                        {/* ------------- */}
                     </div>
                     <div ref={resumeRef}> {/* Wrap ResumePreview in a ref */}
                         <ResumePreview />
