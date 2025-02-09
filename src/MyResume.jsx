@@ -99,7 +99,7 @@ const MyResume = () => {
                         <RWebShare
                             data={{
                                 text: "Hello Everyone, This is my resume please open url to see it",
-                                url: `${baseUrl}/myResume/${resumeId}/view`,
+                                // url: `${baseUrl}/myResume/${resumeId}/view`,
                                 title: resumeInfo?.firstName + " " + resumeInfo?.lastName + " resume",
                             }}
                             onClick={() => console.log("shared successfully!")}
