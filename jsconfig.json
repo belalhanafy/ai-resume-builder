@@ -1,0 +1,17 @@
+// This will allow you to use @/ as an alias for ./src/, making imports cleaner.
+// For example, you can import a component like this:
+// import Button from '@/components/Button.vue';
+// Instead of:
+// import Button from './src/components/Button.vue';
+{
+    "compilerOptions": {
+        // ...
+        "baseUrl": ".",
+        "paths": {
+            "@/*": [
+                "./src/*"
+            ]
+        }
+        // ...
+    }
+}
