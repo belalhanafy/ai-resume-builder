@@ -19,7 +19,7 @@ const education = {
     "major": "",
     "description": ''
 }
-const Education = ({ activeFormIndex, setEnableNext,setLoadingHeader }) => {
+const Education = ({ activeFormIndex, setEnableNext, setLoadingHeader }) => {
     const { toast } = useToast()
     const { resumeId } = useParams();
     const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
@@ -52,9 +52,9 @@ const Education = ({ activeFormIndex, setEnableNext,setLoadingHeader }) => {
         })
     }, [educationList])
 
-    useEffect(()=>{
-        resumeInfo?.education.length>0&&setEducationList(resumeInfo?.education)
-    },[])
+    useEffect(() => {
+        resumeInfo?.education.length > 0 && setEducationList(resumeInfo?.education)
+    }, [])
 
 
     const handleSubmit = async (e) => {
@@ -94,6 +94,11 @@ const Education = ({ activeFormIndex, setEnableNext,setLoadingHeader }) => {
             description: "New Education Added",
         })
     };
+    const handleCheckBox = (e, index) => {
+        const newEntries = educationList.slice();
+        newEntries[index]["currentlyWorking"] = e.target.checked;
+        setEducationList(newEntries);
+    }
     const removeEducation = (index) => {
         setEducationList(educationList.filter((_, i) => i !== index))
         toast({
@@ -160,18 +165,61 @@ const Education = ({ activeFormIndex, setEnableNext,setLoadingHeader }) => {
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-gray-700 font-semibold mb-2 capitalize" htmlFor="endDate">
-                                        End Date
-                                    </label>
-                                    <Input
-                                        value={edu.endDate}
-                                        placeholder="Enter End Date"
-                                        type="text"
-                                        required
-                                        name="endDate"
-                                        onChange={(e) => handleChange(e, index)}
-                                        disabled={loading}
-                                    />
+                                    <div className={`flex items-start flex-col ${educationList[index]["currentlyWorking"] ? 'gap-1' : 'gap-5'}`}>
+                                        <div className='w-full'>
+                                            <label className="block text-gray-700 font-semibold mb-2 capitalize" htmlFor="endDate">
+                                                End Date
+                                            </label>
+                                            {!educationList[index]["currentlyWorking"] ? (
+                                                <Input
+                                                    value={edu?.endDate || ''}
+                                                    placeholder="enter End Date"
+                                                    type="text"
+                                                    required
+                                                    name="endDate"
+                                                    onChange={(e) => handleChange(e, index)}
+                                                    disabled={loading}
+                                                />
+                                            ) : ('')
+                                            }
+                                        </div>
+                                        <div className='flex gap-2 items-center'>
+                                            <div className='w-[20px] h-[20px] '>
+                                                <label className="neon-checkbox">
+                                                    <input type="checkbox" onChange={(e) => handleCheckBox(e, index)} checked={edu?.currentlyWorking || false}
+                                                    />
+                                                    <div className="neon-checkbox__frame">
+                                                        <div className="neon-checkbox__box">
+                                                            <div className="neon-checkbox__check-container">
+                                                                <svg viewBox="0 0 24 24" className="neon-checkbox__check">
+                                                                    <path d="M3,12.5l7,7L21,5" />
+                                                                </svg>
+                                                            </div>
+                                                            <div className="neon-checkbox__glow" />
+                                                            <div className="neon-checkbox__borders">
+                                                                <span /><span /><span /><span />
+                                                            </div>
+                                                        </div>
+                                                        <div className="neon-checkbox__effects">
+                                                            <div className="neon-checkbox__particles">
+                                                                <span /><span /><span /><span /> <span /><span /><span /><span /> <span /><span /><span /><span />
+                                                            </div>
+                                                            <div className="neon-checkbox__rings">
+                                                                <div className="ring" />
+                                                                <div className="ring" />
+                                                                <div className="ring" />
+                                                            </div>
+                                                            <div className="neon-checkbox__sparks">
+                                                                <span /><span /><span /><span />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                            <p>Precent (Current)</p>
+                                        </div>
+                                    </div>
+
                                 </div>
 
                                 <div className='col-span-2'>

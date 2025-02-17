@@ -21,7 +21,7 @@ const exp = {
     'workSummary': '',
     "currentlyWorking": false,
 }
-const Experience = ({ setEnableNext,setLoadingHeader,activeFormIndex }) => {
+const Experience = ({ setEnableNext, setLoadingHeader, activeFormIndex }) => {
     const { toast } = useToast()
     const { resumeId } = useParams();
     const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
@@ -32,9 +32,9 @@ const Experience = ({ setEnableNext,setLoadingHeader,activeFormIndex }) => {
 
 
 
-    useEffect(()=>{
-        resumeInfo?.experience.length>0&&setExperinceList(resumeInfo?.experience)
-    },[])
+    useEffect(() => {
+        resumeInfo?.experience.length > 0 && setExperinceList(resumeInfo?.experience)
+    }, [])
 
     const handleChange = (e, index) => {
 
@@ -59,7 +59,8 @@ const Experience = ({ setEnableNext,setLoadingHeader,activeFormIndex }) => {
         newEntries[index][name] = e.target.value;
         setExperinceList(newEntries)
     }
-
+    
+    
     useEffect(() => {
         setResumeInfo({
             ...resumeInfo,
@@ -90,6 +91,11 @@ const Experience = ({ setEnableNext,setLoadingHeader,activeFormIndex }) => {
             setLoadingHeader(false)
         }
     };
+    const handleCheckBox = (e, index) => {
+        const newEntries = experinceList.slice();
+        newEntries[index]["currentlyWorking"] = e.target.checked;
+        setExperinceList(newEntries);
+    }
 
     const addNewExperince = () => {
         setExperinceList([...experinceList, {
@@ -185,18 +191,60 @@ const Experience = ({ setEnableNext,setLoadingHeader,activeFormIndex }) => {
                                         disabled={loading}
                                     />
                                 </div>
-                                <div>
-                                    <label className="block text-gray-700 font-semibold mb-2 capitalize" htmlFor="endDate">end date</label>
-                                    <Input
-                                        value={exp?.endDate || ''}
-                                        placeholder="enter End Date"
-                                        type="text"
-                                        required
-                                        name="endDate"
-                                        onChange={(e) => handleChange(e, index)}
-                                        disabled={loading}
-                                    />
+                                <div className={`flex items-start flex-col ${experinceList[index]["currentlyWorking"] ? 'gap-1' : 'gap-5'}`}>
+                                    <div className='w-full'>
+                                        <label className="block text-gray-700 font-semibold mb-2 capitalize" htmlFor="endDate">end date</label>
+                                        {!experinceList[index]["currentlyWorking"] ? (
+                                            <Input
+                                                value={exp?.endDate || ''}
+                                                placeholder="enter End Date"
+                                                type="text"
+                                                required
+                                                name="endDate"
+                                                onChange={(e) => handleChange(e, index)}
+                                                disabled={loading}
+                                            />
+                                        ) : ('')
+                                        }
+                                    </div>
+                                    <div className='flex gap-2 items-center'>
+                                        <div className='w-[20px] h-[20px] '>
+                                            <label className="neon-checkbox">
+                                                <input type="checkbox" onChange={(e) => handleCheckBox(e, index)} checked={exp?.currentlyWorking || false}
+                                                />
+                                                <div className="neon-checkbox__frame">
+                                                    <div className="neon-checkbox__box">
+                                                        <div className="neon-checkbox__check-container">
+                                                            <svg viewBox="0 0 24 24" className="neon-checkbox__check">
+                                                                <path d="M3,12.5l7,7L21,5" />
+                                                            </svg>
+                                                        </div>
+                                                        <div className="neon-checkbox__glow" />
+                                                        <div className="neon-checkbox__borders">
+                                                            <span /><span /><span /><span />
+                                                        </div>
+                                                    </div>
+                                                    <div className="neon-checkbox__effects">
+                                                        <div className="neon-checkbox__particles">
+                                                            <span /><span /><span /><span /> <span /><span /><span /><span /> <span /><span /><span /><span />
+                                                        </div>
+                                                        <div className="neon-checkbox__rings">
+                                                            <div className="ring" />
+                                                            <div className="ring" />
+                                                            <div className="ring" />
+                                                        </div>
+                                                        <div className="neon-checkbox__sparks">
+                                                            <span /><span /><span /><span />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <p>Precent (Current)</p>
+                                    </div>
                                 </div>
+
+
 
                                 <div className='col-span-2'>
                                     {/* work description */}
@@ -215,11 +263,11 @@ const Experience = ({ setEnableNext,setLoadingHeader,activeFormIndex }) => {
                                 }
                                 {experinceList.length != 1 &&
 
-                                <Button onClick={() => removeExperince(index)} disabled={loading} type="button" variant="destructive">
-                                    < IoTrashOutline className='mr-1' />
-                                    Remove
-                                </Button>
-}
+                                    <Button onClick={() => removeExperince(index)} disabled={loading} type="button" variant="destructive">
+                                        < IoTrashOutline className='mr-1' />
+                                        Remove
+                                    </Button>
+                                }
                             </div>
                         </form>
                     ))
